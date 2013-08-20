@@ -10,6 +10,16 @@ public class PerceptronData {
 	private String modelFileName;
 	
 	private String inputFileName;
+	
+	private String[] words;
+
+	public String[] getWords() {
+		return words;
+	}
+
+	public void setWords(String[] words) {
+		this.words = words;
+	}
 
 	public String getModelFileName() {
 		return modelFileName;

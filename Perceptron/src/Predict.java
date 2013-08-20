@@ -3,41 +3,59 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.*;
 import java.util.regex.Pattern;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 import org.hamcrest.Matcher;
 
 
 public class Predict {
 
-	public void predict(PerceptronData data) {
+	public Boolean predict(PerceptronData data) {
 		// TODO Auto-generated method stub
 		String inputFileName = data.getInputFileName();
-
+		Unigram unigram = new Unigram();
+		HashMap<String, Double> unigramPro = unigram.UnigramPro(data);
+		HashMap<String, Double> weight = data.getWeight(); 
 		
+		//Â ãƒãƒƒã‚·ãƒ¥ã®ã‚­ãƒ¼ã‚’é †ã«å–å¾—ã™ã‚‹
+		Set<String> keys = unigramPro.keySet();
+		Set<String> sortedKeys = new TreeSet<String>(keys); 
+		java.util.Iterator<String> ite = sortedKeys.iterator();
 		
+		double value = 0;
 		
+		while(ite.hasNext()){
+			String key = (String)ite.next();
+			value += (double)unigramPro.get(key) * (double)weight.get(key);
+		}
+		
+		if(value >= 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public void loadWeight(PerceptronData data) throws FileNotFoundException {
 		
 		HashMap<String, Double> model = data.getWeight();
 		
-		//ƒtƒ@ƒCƒ‹“Ç‚İ‚İ‚Ì€”õ
+		//ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã®æº–å‚™
 		String fileName = data.getModelFileName();
 		FileReader fr = new FileReader(fileName);
 		BufferedReader br = new BufferedReader(fr);
 		
-		//‚Ps‚²‚Æ‚É“Ç‚İæ‚é‚½‚ß‚Ì‘Oˆ—
-		StringBuffer text = new StringBuffer(1024);
+		//ï¼‘è¡Œã”ã¨ã«èª­ã¿å–ã‚‹ãŸã‚ã®å‰å‡¦ç†
 		String line;
-		String lineSeparator = System.getProperty("line.separator");
 		
-		//ƒtƒ@ƒCƒ‹“Ç‚İ‚İˆ—
+		//ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿å‡¦ç†
 		try {
 			while((line = br.readLine()) != null) {
-				//StringŒ^‚É•ÏŠ·‚µ‚Ä•Ô‚·
-				String[] words = replaceMethod(new String(text));
+				//Stringå‹ã«å¤‰æ›ã—ã¦è¿”ã™
+				String[] words = replaceMethod(line);
 				if(model.containsKey(words[0])){
 					System.out.println("model is duplicate");
 				}else{
