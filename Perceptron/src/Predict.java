@@ -15,9 +15,7 @@ public class Predict {
 
 	public Boolean predict(PerceptronData data) {
 		// TODO Auto-generated method stub
-		String inputFileName = data.getInputFileName();
-		Unigram unigram = new Unigram();
-		HashMap<String, Double> unigramPro = unigram.UnigramPro(data);
+		HashMap<String, Double> unigramPro = data.getUnigrmProbablity();
 		HashMap<String, Double> weight = data.getWeight(); 
 		
 		// ハッシュのキーを順に取得する

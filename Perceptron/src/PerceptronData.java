@@ -12,6 +12,26 @@ public class PerceptronData {
 	private String inputFileName;
 	
 	private String[] words;
+	
+	private String label;
+	
+	private HashMap<String, Double> unigrmProbablity = new HashMap<String, Double>();
+
+	public HashMap<String, Double> getUnigrmProbablity() {
+		return unigrmProbablity;
+	}
+
+	public void setUnigrmProbablity(HashMap<String, Double> unigrmProbablity) {
+		this.unigrmProbablity = unigrmProbablity;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
 
 	public String[] getWords() {
 		return words;

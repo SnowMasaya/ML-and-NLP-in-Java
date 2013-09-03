@@ -14,14 +14,12 @@ public class UnigramTest {
 		
 		double actual = 0.5;
 		
-		InputFile input  = new InputFile();
 		PerceptronData data = new PerceptronData();
 		data.setInputFileName("hoge.txt");
-		String[] words = input.read(data); 
 		
-		data.setWords(words);
 		Unigram unigram = new Unigram();
-		HashMap<String, Double> matcher = unigram.UnigramPro(data);
+		unigram.UnigramPro(data);
+		HashMap<String, Double> matcher = data.getUnigrmProbablity();
 		assertThat(actual, is(matcher.get("Test")));
 		assertThat(actual, is(matcher.get("hogehoge")));
 	}
