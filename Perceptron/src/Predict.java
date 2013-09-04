@@ -49,11 +49,13 @@ public class Predict {
 		//１行ごとに読み取るための前処理
 		String line;
 		
+		InputFile input = new InputFile();
+		
 		//ファイル読み込み処理
 		try {
 			while((line = br.readLine()) != null) {
 				//String型に変換して返す
-				String[] words = replaceMethod(line);
+				String[] words = input.replaceMethod(line);
 				if(model.containsKey(words[0])){
 					System.out.println("model is duplicate");
 				}else{
@@ -67,11 +69,4 @@ public class Predict {
 
 	}
 
-	private static String[] replaceMethod(String replaceText) {
-		Pattern pattern = Pattern.compile("\n$");
-		java.util.regex.Matcher matcher = pattern.matcher(replaceText);
-		String strResult = matcher.replaceAll("");
-		String[] words = strResult.split(" ");
-		return words;
-	}
 }

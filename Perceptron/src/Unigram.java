@@ -13,6 +13,16 @@ public class Unigram {
 	void UnigramPro(PerceptronData data) throws FileNotFoundException{
 		
 		String[] words = read(data);
+		HashMap<String, Double> weight = data.getWeight(); 
+		double weightValue = 1.0;
+		
+		//d‚İ‚É’l‚ª–³‚¯‚ê‚Î‰Šú‰»
+		for(int i = 0; i < words.length; i++) {
+			if(!(weight.containsKey(words[i]))){
+				weight.put(words[i], weightValue);
+				data.setWeight(weight);
+			}
+		}
 		
 		HashMap<String, Double> probablity = new HashMap<String, Double>();
 		double value = 1;

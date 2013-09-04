@@ -34,11 +34,19 @@ public class InputFile {
 		return words;
 	}
 	
-	private static String[] replaceMethod(String replaceText) {
+	public static String[] replaceMethod(String replaceText) {
 		Pattern pattern = Pattern.compile("\n$");
 		Matcher matcher = pattern.matcher(replaceText);
 		String strResult = matcher.replaceAll("");
 		String[] words = strResult.split(" ");
 		return words;
+	}
+	
+	public static String[] splitLabel(String text) {
+		Pattern pattern = Pattern.compile("\n$");
+		Matcher matcher = pattern.matcher(text);
+		String strResult = matcher.replaceAll("");
+		String[] label = strResult.split("\t");
+		return label;
 	}
 }

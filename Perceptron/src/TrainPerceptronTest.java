@@ -11,7 +11,8 @@ public class TrainPerceptronTest {
 	@Test
 	public void test() throws FileNotFoundException {
 		PerceptronData data = new PerceptronData();
-		data.setInputFileName("titles-en-train.labeled");
+//		data.setInputFileName("titles-en-train.labeled");
+		data.setInputFileName("train.txt");
 		
 		Unigram unigram = new Unigram();
 		unigram.UnigramPro(data);
